@@ -1,0 +1,21 @@
+module ripple_carry_adder (
+    input  [3:0] a, b,
+    input  Cin,
+    output reg [3:0] Sum,
+    output reg   C4
+);
+    integer i;
+    reg carry;
+
+    always @(*) begin
+        carry = Cin;
+
+        for (i = 0; i < 4; i = i + 1) begin
+            Sum[i] = A[i] ^ B[i] ^ carry;
+            carry = (A[i] & B[i]) | (B[i] & carry) | (A[i] & carry);
+        end
+
+        C4 = carry;
+    end
+
+endmodule
